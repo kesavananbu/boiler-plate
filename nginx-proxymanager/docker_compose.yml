@@ -3,6 +3,7 @@ services:
   proxy-manager:
     container_name: proxy-manager
     image: 'jc21/nginx-proxy-manager:latest'
+    network_mode: bridge
     restart: unless-stopped
     ports:
       - '80:80'
