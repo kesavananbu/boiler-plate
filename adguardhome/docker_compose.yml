@@ -2,7 +2,8 @@ version: '2'
 services:
     adguard-home:
         container_name: adguard-home
-        image: adguard/adguardhome
+        image: adguard/adguardhome:latest
+        network_mode: bridge
         restart: unless-stopped
         cap_add:
             - NET_ADMIN
