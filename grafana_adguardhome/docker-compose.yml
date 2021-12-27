@@ -37,6 +37,7 @@ services:
      - "influxdb:10.0.0.141"
     volumes:
      - /grafana/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+     - /AdGuardData/workdir/data/:/adguarddata:ro
     environment: 
       - DOCKER_INFLUXDB_INIT_ORG=admin
       - DOCKER_INFLUXDB_INIT_BUCKET=telegraf
