@@ -1,0 +1,50 @@
+version: "3"
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    network_mode: bridge
+    restart: always
+    ports:
+      - 4000:3000
+    volumes:
+      - grafana-volume:/vol01/Docker/monitoring
+      
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    network_mode: bridge
+    ports:
+      - 8086:8086
+    volumes:
+      - influxdb-volume:/vol01/Docker/monitoring
+      - influxdb2-volume:/var/lib/influxdb2:rw
+    environment:
+       - DOCKER_INFLUXDB_INIT_MODE=setup
+       - DOCKER_INFLUXDB_INIT_USERNAME=admin
+       - DOCKER_INFLUXDB_INIT_PASSWORD=token
+       - DOCKER_INFLUXDB_INIT_ORG=admin
+       - DOCKER_INFLUXDB_INIT_BUCKET=telegraf
+       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=token
+    restart: always
+     
+  telegraf:
+    image: telegraf
+    container_name: telegraf
+    network_mode: bridge
+    restart: always
+    extra_hosts:
+     - "influxdb:10.0.0.141"
+    volumes:
+     - /grafana/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    environment: 
+      - DOCKER_INFLUXDB_INIT_ORG=admin
+      - DOCKER_INFLUXDB_INIT_BUCKET=telegraf
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=token
+    depends_on:
+      - influxdb
+
+volumes:
+  grafana-volume:
+  influxdb-volume:
+  influxdb2-volume:
