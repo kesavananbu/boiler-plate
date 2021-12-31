@@ -10,5 +10,5 @@ services:
       - /jdownloader2/config:/config:rw
       - /Media:/output:rw
     environment: 
-      MYJD_USER: email@email.com
+      MYJD_USER: email@email.com #from the myjdownloader.org free account 
       MYJD_PASSWORD: password
