@@ -9,3 +9,6 @@ services:
     volumes:
       - /jdownloader2/config:/config:rw
       - /Media:/output:rw
+    environment: 
+      MYJD_USER: email@email.com
+      MYJD_PASSWORD: password
