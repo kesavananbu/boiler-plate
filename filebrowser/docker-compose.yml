@@ -1,0 +1,15 @@
+version: '3'
+services:
+  file-browser:
+    image: filebrowser/filebrowser:latest
+    container_name: file-browser
+    network_mode: bridge
+    user: "${UID}:${GID}"
+    ports:
+      - 8081:80
+    volumes:
+      - /Media:/srv
+      - /filebrowser/filebrowser.db:/database.db
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
