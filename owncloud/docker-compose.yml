@@ -12,7 +12,7 @@ services:
       - mariadb
       - redis
     environment:
-      - OWNCLOUD_DOMAIN=owncloud.kesavananbu.in
+      - OWNCLOUD_DOMAIN=domainname
       - OWNCLOUD_DB_TYPE=mysql
       - OWNCLOUD_DB_NAME=owncloud
       - OWNCLOUD_DB_USERNAME=owncloud
