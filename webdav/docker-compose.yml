@@ -1,0 +1,18 @@
+version: '2'
+services:
+  webdav:
+    container_name: webdav
+    network_mode: bridge
+    image: ugeek/webdav:arm
+    ports:
+      - 8099:80
+    volumes:
+      - /Media:/media
+    env_file:
+      - /data/secret.env
+    environment:
+      #- USERNAME=username
+      #- PASSWORD=password
+      - UID=1000
+      - GID=1000
+      - TZ=Asia/Kolkota
