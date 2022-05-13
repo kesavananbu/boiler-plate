@@ -9,6 +9,8 @@ services:
     volumes:
       - /jdownloader2/config:/config:rw
       - /Media:/output:rw
-    environment: 
-      MYJD_USER: email@email.com #from the myjdownloader.org free account 
-      MYJD_PASSWORD: password
+    env_file:
+      - secret.env
+   # environment: 
+   #   MYJD_USER: email@email.com #from the myjdownloader.org free account 
+   #   MYJD_PASSWORD: password
