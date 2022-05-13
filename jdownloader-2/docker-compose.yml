@@ -10,7 +10,7 @@ services:
       - /jdownloader2/config:/config:rw
       - /Media:/output:rw
     env_file:
-      - secret.env
+      - /data/secret.env
    # environment: 
    #   MYJD_USER: email@email.com #from the myjdownloader.org free account 
    #   MYJD_PASSWORD: password
