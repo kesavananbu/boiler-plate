@@ -1,4 +1,3 @@
-#docker-compose exec owncloud occ files:scan --all to scan local directory
 version: "3"
 services:
   owncloud:
@@ -11,15 +10,17 @@ services:
     depends_on:
       - mariadb
       - redis
+    env_file:
+      - /data/secret.env
     environment:
-      - OWNCLOUD_DOMAIN=domainname
+      #- OWNCLOUD_DOMAIN=domainname
       - OWNCLOUD_DB_TYPE=mysql
       - OWNCLOUD_DB_NAME=owncloud
       - OWNCLOUD_DB_USERNAME=owncloud
       - OWNCLOUD_DB_PASSWORD=owncloud
       - OWNCLOUD_DB_HOST=mariadb
-      - OWNCLOUD_ADMIN_USERNAME=adminname
-      - OWNCLOUD_ADMIN_PASSWORD=adminpassword
+      #- OWNCLOUD_ADMIN_USERNAME=username
+      #- OWNCLOUD_ADMIN_PASSWORD=password
       - OWNCLOUD_MYSQL_UTF8MB4=true
       - OWNCLOUD_REDIS_ENABLED=true
       - OWNCLOUD_REDIS_HOST=redis
