@@ -5,51 +5,34 @@ services:
     image: postgres
     restart: always
     volumes:
-      - db:/var/lib/postgresql/data
+      - /NextCloud/postgress:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB_FILE=/run/secrets/postgres_db
-      - POSTGRES_USER_FILE=/run/secrets/postgres_user
-      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
-    secrets:
-      - postgres_db
-      - postgres_password
-      - postgres_user
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=postgress
+      - POSTGRES_PASSWORD=postgress
 
   app:
     image: nextcloud
     restart: always
+    env_file:
+      - /data/secret.env
     ports:
       - 8090:80
     volumes:
-      - nextcloud:/var/www/html
+      - /NextCloud/nextcloud:/var/www/html
+      - /Media:/mnt/data/d1
     environment:
       - POSTGRES_HOST=db
-      - POSTGRES_DB_FILE=/run/secrets/postgres_db
-      - POSTGRES_USER_FILE=/run/secrets/postgres_user
-      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
-      - NEXTCLOUD_ADMIN_PASSWORD_FILE=/run/secrets/nextcloud_admin_password
-      - NEXTCLOUD_ADMIN_USER_FILE=/run/secrets/nextcloud_admin_user
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=postgress
+      - POSTGRES_PASSWORD=postgress
+      #- NEXTCLOUD_ADMIN_USER=username
+      #- NEXTCLOUD_ADMIN_PASSWORD=password
+      - TRUSTED_PROXIES=swag
+      - OVERWRITEPROTOCOL=https
+      #- OVERWRITECLIURL=https://nextcloud.domainname
+      #- OVERWRITEHOST=nextcloud.domainname
+      #- NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.domainname
+
     depends_on:
       - db
-    secrets:
-      - nextcloud_admin_password
-      - nextcloud_admin_user
-      - postgres_db
-      - postgres_password
-      - postgres_user
-
-volumes:
-  db:
-  nextcloud:
-
-secrets:
-  nextcloud_admin_password:
-    file: /NextCloud/pass.txt # put admin password to this file
-  nextcloud_admin_user:
-    file: /NextCloud/user.txt # put admin username to this file
-  postgres_db:
-    file: /NextCloud/db.txt # put postgresql db name to this file
-  postgres_password:
-    file: /NextCloud/pass.txt # put postgresql password to this file
-  postgres_user:
-    file: /NextCloud/user.txt # put postgresql username to this file
