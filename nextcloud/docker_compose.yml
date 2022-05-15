@@ -36,17 +36,19 @@ services:
       #- OVERWRITECLIURL=https://nextcloud.domainname
       #- OVERWRITEHOST=nextcloud.domainname
       #- NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.domainname
+      - FILESYSTEM_CHECK_CHANGES=1 # Update in the config/config.php file if environment variable not working
+      - FILES_EXTERNAL_ALLOW_CREATE_NEW_LOCAL=true # Update in the config/config.php file if environment variable not working
 
     depends_on:
       - db
   
-  cron:
-    image: nextcloud
-    restart: always
-    volumes:
-      - /NextCloud/nextcloud:/var/www/html
-    entrypoint: /cron.sh
-    depends_on:
-      - db
-      - app  
+  #cron:
+  #  image: nextcloud
+  #  restart: always
+  #  volumes:
+  #    - /NextCloud/nextcloud:/var/www/html
+  #  entrypoint: /cron.sh
+  #  depends_on:
+  #    - db
+  #    - app  
       
