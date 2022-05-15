@@ -33,6 +33,9 @@ services:
     volumes:
       - /owncloud_stack/owncloud:/mnt/data
       - /Media:/mnt/data/d1
+      #execute below script to get full access on external local storage
+      #sudo chown -R www-data:www-data /Media
+      #sudo chmod -R 0750 /Media
 
   mariadb:
     image: mariadb:10.5
