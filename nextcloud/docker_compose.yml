@@ -40,3 +40,13 @@ services:
     depends_on:
       - db
       
+  cron:
+    image: nextcloud
+    restart: always
+    volumes:
+      - /NextCloud/nextcloud:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - app  
+      
