@@ -24,6 +24,8 @@ services:
       #execute below script to get full access on external local storage
       #sudo chown -R www-data:www-data /Media
       #sudo chmod -R 0750 /Media
+      #else execute this line alone for the folder
+      #sudo chmod -R 777 /Media
     environment:
       - POSTGRES_HOST=db
       - POSTGRES_DB=nextcloud
