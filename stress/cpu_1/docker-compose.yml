@@ -1,0 +1,7 @@
+# docker-compose.yaml
+version: '3'
+
+services:
+  stress:
+    image: alexeiled/stress-ng
+    command: [--cpu, "1"]
