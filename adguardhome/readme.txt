@@ -9,4 +9,4 @@ Start Service:
   sudo systemctl enable firewallblocker.service
   sudo systemctl start firewallblocker.service
 
-So whenever you add the ip or iplist in the disallowist client ips in the AdguardHome -> Settings -> DNS Settings [Disallowed clients]
+So whenever you add/update the ip or iplist in the disallowist client ips in the AdguardHome -> Settings -> DNS Settings [Disallowed clients] automatically updates the ip blocklist in the firewall-cmd
