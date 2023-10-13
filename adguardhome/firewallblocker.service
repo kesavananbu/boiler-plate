@@ -1,0 +1,13 @@
+[Unit]
+Description=Firwall Block List Updater Script
+
+[Service]
+Type=simple
+ExecStart=/firewall/monitor.sh
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=monitor
+
+[Install]
+WantedBy=multi-user.target
