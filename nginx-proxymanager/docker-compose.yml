@@ -9,5 +9,5 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - 'proxymanager/data:/data'
-      - 'proxymanager/letsencrypt:/etc/letsencrypt'
+      - 'proxymanager_data:/data'
+      - 'proxymanager_letsencrypt:/etc/letsencrypt'
