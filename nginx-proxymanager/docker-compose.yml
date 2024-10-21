@@ -1,7 +1,7 @@
 services:
   proxy-manager:
     container_name: proxy-manager
-    image: 'jc21/nginx-proxy-manager:latest'
+    image: jc21/nginx-proxy-manager:latest
     network_mode: bridge
     restart: unless-stopped
     ports:
@@ -9,5 +9,9 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - 'proxymanager_data:/data'
-      - 'proxymanager_letsencrypt:/etc/letsencrypt'
+      - proxymanager_data:/data
+      - proxymanager_letsencrypt:/etc/letsencrypt
+
+volumes:
+  proxymanager_data:
+  proxymanager_letsencrypt:
