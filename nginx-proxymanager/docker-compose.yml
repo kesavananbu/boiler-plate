@@ -9,9 +9,5 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - proxymanager_data:/data
-      - proxymanager_letsencrypt:/etc/letsencrypt
-
-volumes:
-  proxymanager_data:
-  proxymanager_letsencrypt:
+      - /volume1/docker/proxymanager/data:/data
+      - /volume1/docker/proxymanager/letsencrypt:/etc/letsencrypt
