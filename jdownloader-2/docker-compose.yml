@@ -2,7 +2,7 @@ services:
   jdownloader-2:
     container_name: jdownloader-2
     network_mode: bridge
-    image: daniel0076/jdownloader-2:latest
+    image: jlesage/jdownloader-2:latest
     ports:
       - 5800:5800
     volumes:
