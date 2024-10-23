@@ -1,4 +1,3 @@
-version: "2.1"
 services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -11,7 +10,7 @@ services:
       - WEBUI_PORT=8082
     volumes:
       - /qbittorrent/config:/config
-      - /Media:/downloads
+      - /volume1/Movies/Media/downloads:/downloads
     ports:
       - 6881:6881
       - 6881:6881/udp
