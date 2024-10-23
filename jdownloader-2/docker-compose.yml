@@ -10,6 +10,11 @@ services:
       - /volume1/docker/jdownloader2/downloads:/output:rw
     env_file:
       - /data/secret.env
-   # environment: 
-   #   MYJD_USER: email@email.com #from the myjdownloader.org free account 
-   #   MYJD_PASSWORD: password
+   environment: 
+      MYJDOWNLOADER_EMAIL: email@email.com #from the myjdownloader.org free account 
+      MYJDOWNLOADER_PASSWORD: password
+      MYJDOWNLOADER_DEVICE_NAME : name
+      WEB_AUTHENTICATION_USERNAME: email@email.com
+      WEB_AUTHENTICATION_PASSWORD: password
+      SECURE_CONNECTION: 1
+      WEB_AUTHENTICATION: 1
