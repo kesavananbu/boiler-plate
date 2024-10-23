@@ -9,7 +9,7 @@ services:
       - /volume1/docker/jdownloader2/config:/config:rw
       - /volume1/docker/jdownloader2/downloads:/output:rw
     env_file:
-      - stack.env
+      - /volume1/docker/secret.env
    # environment: 
    #   MYJD_USER: email@email.com #from the myjdownloader.org free account 
    #   MYJD_PASSWORD: password
