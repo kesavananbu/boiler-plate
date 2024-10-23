@@ -9,7 +9,7 @@ services:
       - TZ=Aisa/Kolkata
       - WEBUI_PORT=8082
     volumes:
-      - /volume1/qbittorrent/config:/config
+      - /volume1/docker/qbittorrent/config:/config
       - /volume1/Movies/Media/downloads:/downloads
     ports:
       - 6881:6881
