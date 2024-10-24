@@ -2,12 +2,12 @@ services:
   proxy-manager:
     container_name: proxy-manager
     image: jc21/nginx-proxy-manager:latest
-    network_mode: bridge
+    network_mode: host
     restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
+    #ports:
+    #  - '80:80'
+    #  - '81:81'
+    #  - '443:443'
     volumes:
       - /volume1/docker/proxymanager/data:/data
       - /volume1/docker/proxymanager/letsencrypt:/etc/letsencrypt
