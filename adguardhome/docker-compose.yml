@@ -1,35 +1,31 @@
-version: "3.3"
-
-networks:
-  proxy:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.20.0.0/16 #Custom Range
-
+#networks:
+#  proxy:
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 172.20.0.0/16 #Custom Range
 services:
     adguard-home:
         container_name: adguard-home
         image: adguard/adguardhome:latest
-        #network_mode: bridge
-        networks:
-
-          proxy:
-            ipv4_address: 172.20.0.10 # Custom Ip address
+        network_mode: bridge
+        #networks:
+        #  proxy:
+        #    ipv4_address: 172.20.0.10 # Custom Ip address
         restart: unless-stopped
         cap_add:
             - NET_ADMIN
         volumes:
-            - '/AdGuardData/workdir:/opt/adguardhome/work'
-            - '/AdGuardData/confdir:/opt/adguardhome/conf'
-            - '/AdGuardData/certdir:/opt/adguardhome/cert' # For SSL Certificates path
+            - /volume1/docker/AdGuardData/workdir:/opt/adguardhome/work
+            - /volume1/docker/AdGuardData/confdir:/opt/adguardhome/conf
+            - /volume1/docker/AdGuardData/certdir:/opt/adguardhome/cert # For SSL Certificates path
         ports:
             - 53:53/tcp
             - 53:53/udp
             - 8080:80/tcp
             - 8080:80/udp
-            - 444:443/tcp
-            - 444:443/udp
+            - 445:443/tcp
+            - 445:443/udp
             - 853:853/tcp
             - 853:853/udp
             - 5443:5443/tcp
