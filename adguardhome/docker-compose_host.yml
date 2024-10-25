@@ -1,0 +1,36 @@
+services:
+    adguard-home:
+        container_name: adguard-home
+        image: adguard/adguardhome:latest
+        networks:
+          docker_vlan:
+            ipv4_address: 192.168.1.101 # Custom Ip address
+            ipv6_address: fe80::101
+        restart: unless-stopped
+        cap_add:
+            - NET_ADMIN
+        volumes:
+            - /volume1/docker/AdGuardData/workdir:/opt/adguardhome/work
+            - /volume1/docker/AdGuardData/confdir:/opt/adguardhome/conf
+            - /volume1/docker/AdGuardData/certdir:/opt/adguardhome/cert # For SSL Certificates path
+        ports:
+            - 53:53/tcp
+            - 53:53/udp
+            - 80:80/tcp
+            - 80:80/udp
+            - 443:443/tcp
+            - 443:443/udp
+            - 853:853/tcp
+            - 853:853/udp
+            - 5443:5443/tcp
+            - 5443:5443/udp
+            - 784:784/tcp
+            - 784:784/udp
+            - 3000:3000/tcp
+            - 3000:3000/udp
+
+networks:
+  docker_vlan:
+    external:
+      name: docker_vlan
+
