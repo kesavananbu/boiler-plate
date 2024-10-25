@@ -17,7 +17,7 @@ NAMESPACE="macvlan_ns"                    # Namespace to use
 MACVLAN_IP="192.168.1.100/24"             # IPv4 address for the macvlan interface
 MACVLAN_IPV6="fe80::100/64"               # IPv6 address for the macvlan interface
 GATEWAY_IP="192.168.1.1"                  # Default gateway for IPv4 (optional)
-GATEWAY_IPV6="fe80::7e10:c9ff:fed5:1f20"  # Default gateway for IPv6 (optional)
+GATEWAY_IPV6="fe80::1"                    # Default gateway for IPv6 (optional)
 
 # Check if namespace exists, and create it if not
 if ! ip netns list | grep -q "$NAMESPACE"; then
