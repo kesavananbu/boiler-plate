@@ -2,7 +2,7 @@
 
 # Define variables for interface and IP configurations
 PARENT_INTERFACE="eth0"                   # The physical interface on your NAS
-MACVLAN_BRIDGE_INTERFACE="mvlan_bridge"           # Bridge interface name
+MACVLAN_BRIDGE_INTERFACE="macvlan_b"           # Bridge interface name
 MACVLAN_IP="192.168.1.100/24"             # IPv4 address for the macvlan interface
 MACVLAN_IPV6="fe80::100/64"               # IPv6 address for the macvlan interface
 GATEWAY_IP="192.168.1.1"                  # Default gateway for IPv4
