@@ -33,3 +33,7 @@ if ! ip -6 route | grep -q "default via $GATEWAY_IPV6"; then
 fi
 
 echo "Macvlan setup complete. $MACVLAN_BRIDGE_INTERFACE with IP $MACVLAN_IP and IPv6 $MACVLAN_IPV6 is now active."
+
+sudo sysctl -w net.ipv6.conf.all.forwarding=1
+sudo sysctl -p
+
