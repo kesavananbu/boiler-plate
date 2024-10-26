@@ -17,7 +17,7 @@ if ! ip link show "$MACVLAN_BRIDGE_INTERFACE" &> /dev/null; then
     sudo ifconfig "$MACVLAN_BRIDGE_INTERFACE" up
     sudo ip link set "$MACVLAN_BRIDGE_INTERFACE" up
     sudo ip route add 192.168.1.0/24 dev "$MACVLAN_BRIDGE_INTERFACE"
-    sudo ip route delete 192.168.1.0/24 dev "$PARENT_INTERFACE"
+    sudo ip route delete 192.168.1.0/24 dev "$PARENT_INTERFACE"    
     echo "$MACVLAN_BRIDGE_INTERFACE setup complete."
 else
     echo "$MACVLAN_BRIDGE_INTERFACE already exists, skipping setup."
@@ -25,10 +25,12 @@ fi
 
 # Add IPv4 and IPv6 routes if not already present
 if ! ip route | grep -q "default via $GATEWAY_IP dev $MACVLAN_BRIDGE_INTERFACE"; then
-    sudo ip route add default via "$GATEWAY_IP" dev "$MACVLAN_BRIDGE_INTERFACE"
+    sudo ip route delete default via "$GATEWAY_IP" dev "$PARENT_INTERFACE"
+    sudo ip route add default via "$GATEWAY_IP" dev "$MACVLAN_BRIDGE_INTERFACE"    
 fi
 
 if ! ip -6 route | grep -q "default via $GATEWAY_IPV6 dev $MACVLAN_BRIDGE_INTERFACE"; then
+    sudo ip -6 route delete default via "$GATEWAY_IPV6" dev "$PARENT_INTERFACE"
     sudo ip -6 route add default via "$GATEWAY_IPV6" dev "$MACVLAN_BRIDGE_INTERFACE"
 fi
 
