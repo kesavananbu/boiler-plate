@@ -24,11 +24,11 @@ else
 fi
 
 # Add IPv4 and IPv6 routes if not already present
-if ! ip route | grep -q "default via $GATEWAY_IP"; then
+if ! ip route | grep -q "default via $GATEWAY_IP dev $MACVLAN_BRIDGE_INTERFACE"; then
     sudo ip route add default via "$GATEWAY_IP" dev "$MACVLAN_BRIDGE_INTERFACE"
 fi
 
-if ! ip -6 route | grep -q "default via $GATEWAY_IPV6"; then
+if ! ip -6 route | grep -q "default via $GATEWAY_IPV6 dev $MACVLAN_BRIDGE_INTERFACE"; then
     sudo ip -6 route add default via "$GATEWAY_IPV6" dev "$MACVLAN_BRIDGE_INTERFACE"
 fi
 
