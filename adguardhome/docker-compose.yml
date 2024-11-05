@@ -6,6 +6,7 @@ services:
         #network_mode: bridge
         network_mode: host
         # modify the https port and http port in the config file
+        # 443 -> 4444, 80 -> 8080
         restart: unless-stopped
         cap_add:
             - NET_ADMIN
