@@ -7,7 +7,8 @@ services:
     volumes:
       - /volume1/docker/jellyfin/config:/config
       - /volume1/Movies/cache:/cache
-      - /volume1/Movies/Media:/media #:ro
+      - /volume1/Movies/Series:/data/movies
+      - /volume1/Movies/Media:/data/movies #:ro
     ports:
       - 8096:8096
     devices: #include only if you have intel/amd gpu
