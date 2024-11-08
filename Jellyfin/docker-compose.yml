@@ -7,7 +7,7 @@ services:
     volumes:
       - /volume1/docker/jellyfin/config:/config
       - /volume1/Movies/cache:/cache
-      - /volume1/Movies/Series:/data/movies
+      - /volume1/Movies/Series:/data/tvshows
       - /volume1/Movies/Media:/data/movies #:ro
     ports:
       - 8096:8096
