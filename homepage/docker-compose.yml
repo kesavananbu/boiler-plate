@@ -15,3 +15,5 @@ services:
     environment:
       - LOG_LEVEL=debug
     restart: unless-stopped
+
+#https://github.com/walkxcode/dashboard-icons/tree/main/png icons from this path for homepage
