@@ -14,9 +14,4 @@ services:
       - /data/secret.env #Portainer data folder
     environment:
       - LOG_LEVEL=debug
-      #- HOMEPAGE_VAR_AGH_URL=${HOMEPAGE_VAR_AGH_URL}
-      #- HOMEPAGE_VAR_AGH_USERNAME=${HOMEPAGE_VAR_AGH_USERNAME}      
-      #- HOMEPAGE_VAR_AGH_PASSWORD=${HOMEPAGE_VAR_AGH_PASSWORD}
-      #- HOMEPAGE_VAR_PORTAINER_URL=${HOMEPAGE_VAR_PORTAINER_URL}
-      #- HOMEPAGE_VAR_PORTAINER_KEY=${HOMEPAGE_VAR_PORTAINER_KEY}
     restart: unless-stopped
