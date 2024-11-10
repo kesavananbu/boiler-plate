@@ -14,7 +14,7 @@ services:
       - /volume1/docker/netdata/config:/etc/netdata #Config
       - /volume1/docker/netdata/lib:/var/lib/netdata #Config
       - /volume1/docker/netdata/cache:/var/cache/netdata #Config
-      - /:/host/root:ro,rslave
+      - /:/host/root:ro
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /etc/localtime:/etc/localtime:ro
