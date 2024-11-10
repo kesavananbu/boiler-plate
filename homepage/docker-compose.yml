@@ -7,8 +7,8 @@ services:
       - 3001:3000
     volumes:
       - /volume1/docker/homepage/config:/app/config
-      - /volume1/docker/homepage/images:/app/images  
-      - /volume1/docker/homepage/icons:/app/icons  
+      - /volume1/docker/homepage/images:/app/public/images  
+      - /volume1/docker/homepage/icons:/app/public/icons  
       - /var/run/docker.sock:/var/run/docker.sock:ro
     env_file:
       - /data/secret.env #Portainer data folder
