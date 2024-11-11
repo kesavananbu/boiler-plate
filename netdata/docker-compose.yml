@@ -8,6 +8,7 @@ services:
     cap_add:
       - SYS_PTRACE
       - SYS_ADMIN
+      - CAP_PERFMON
     security_opt:
       - apparmor:unconfined
     volumes:
