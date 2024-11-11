@@ -5,9 +5,15 @@ services:
     pid: host
     network_mode: host
     restart: unless-stopped
+    hostname: my_docker_compose_netdata
     cap_add:
       - SYS_PTRACE
       - SYS_ADMIN
+      - PERFMON
+    devices: #include only if you have intel/amd gpu
+      - /dev/dri:/dev/dri    
+    environment:
+      - NETDATA_EXTRA_DEB_PACKAGES=intel-gpu-tools
     security_opt:
       - apparmor:unconfined
     volumes:
