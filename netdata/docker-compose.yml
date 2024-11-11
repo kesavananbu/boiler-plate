@@ -9,7 +9,7 @@ services:
     cap_add:
       - SYS_PTRACE
       - SYS_ADMIN
-      - PERFMON
+      #- PERFMON     Not required in root user mode
     devices: #include only if you have intel/amd gpu
       - /dev/dri:/dev/dri    
     environment:
