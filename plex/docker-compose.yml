@@ -1,0 +1,25 @@
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    network_mode: bridge
+    ports:
+      - 32400:32400/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1901:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    devices:
+      - /dev/dri:/dev/dri # Uncomment this to use intel GPUs for Hardware Transcoding
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Sync the container's time to the host's time
+      - /volume1/docker/plex/config:/config 
+      - /volume1/Movies/Media:/mnt/movies
+      - /volume1/Movies/Series:/mnt/tv
+      - /volume1/docker/plex/transcode:/mnt/transcode
+    restart: unless-stopped
