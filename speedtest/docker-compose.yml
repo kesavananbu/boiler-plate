@@ -1,0 +1,16 @@
+services:
+    speedtest-tracker:
+        container_name: speedtest-tracker
+        ports:
+            - 9100:80
+            - 9101:443
+        environment:
+            - APP_KEY=base64:DDmUvzlrJTykO5JwjRIrUvjfU6LQuYjUjybyjxaCxbQ= # How to generate an app key: https://speedtest-tracker.dev/
+            - DB_CONNECTION=sqlite
+            - APP_TIMEZONE=Asia/Kolkata
+            - SPEEDTEST_SCHEDULE=0 */1 * * * # optional: schedule a speedtest with an cronjob https://crontab.guru
+        volumes:
+            - /volume1/docker/speedtest:/config
+            - /etc/localtime:/etc/localtime:ro
+        image: lscr.io/linuxserver/speedtest-tracker:latest
+        restart: unless-stopped
