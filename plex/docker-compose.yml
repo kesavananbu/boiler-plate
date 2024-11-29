@@ -14,6 +14,8 @@ services:
       - 32414:32414/udp
     devices:
       - /dev/dri:/dev/dri # Uncomment this to use intel GPUs for Hardware Transcoding
+    env_file:
+      - /data/secret.env #Portainer data folder
     environment:
       - TZ=Asia/Kolkata
     volumes:
