@@ -18,6 +18,7 @@ services:
       - /data/secret.env #Portainer data folder
     environment:
       - TZ=Asia/Kolkata
+      #- ADVERTISE_IP= Updated in env file
     volumes:
       - /etc/localtime:/etc/localtime:ro # Sync the container's time to the host's time
       - /volume1/docker/plex/config:/config 
