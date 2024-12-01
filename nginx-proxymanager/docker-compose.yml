@@ -11,3 +11,4 @@ services:
     volumes:
       - /volume1/docker/proxymanager/data:/data
       - /volume1/docker/proxymanager/letsencrypt:/etc/letsencrypt
+      - /volume1/docker/proxymanager/global_rule/server_proxy.conf:/data/nginx/custom/server_proxy.conf
