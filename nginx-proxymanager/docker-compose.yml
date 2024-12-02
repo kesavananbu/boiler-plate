@@ -13,4 +13,5 @@ services:
       - /volume1/docker/proxymanager/letsencrypt:/etc/letsencrypt
       - /volume1/docker/proxymanager/global_rule/server_proxy.conf:/data/nginx/custom/server_proxy.conf
       - /volume1/docker/proxymanager/global_rule/http.conf:/data/nginx/custom/http.conf
+      - /volume1/docker/proxymanager/global_rule/custom_access.conf:/app/templates/_access.conf:ro
       - /volume1/docker/proxymanager/global_rule/custom_access.conf:/templates/_access.conf:ro
