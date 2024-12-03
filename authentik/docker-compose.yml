@@ -1,0 +1,62 @@
+services:
+  postgresql:
+    image: docker.io/library/postgres:16-alpine
+    container_name: postgresql
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/authentik/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
+      POSTGRES_USER: ${AUTHENTIK_PG_USER:-authentik}
+      POSTGRES_DB: ${AUTHENTIK_PG_DB:-authentik}
+      
+  redis:
+    image: docker.io/library/redis:alpine
+    container_name: redis
+    command: --save 60 1 --loglevel warning
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/authentik/redis:/data
+  server:
+    image: ghcr.io/goauthentik/server:latest
+    container_name: authentik
+    restart: unless-stopped
+    command: server
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: ${AUTHENTIK_PG_USER:-authentik}
+      AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_PG_DB:-authentik}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-authentik}
+      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-authentik}
+    volumes:
+      - /volume1/docker/authentik/data/media:/media
+      - /volume1/docker/authentik/data/templates:/templates
+    ports:
+      - "9010:9000"
+      - "9011:9443"
+    depends_on:
+      - postgresql
+      - redis
+  worker:
+    image: ghcr.io/goauthentik/server:latest
+    container_name: authentik-worker
+    restart: unless-stopped
+    command: worker
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: ${AUTHENTIK_PG_USER:-authentik}
+      AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_PG_DB:-authentik}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-authentik}
+      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-authentik}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /volume1/docker/authentik/data/certs:/certs
+      - /volume1/docker/authentik/data/media:/media
+      - /volume1/docker/authentik/data/templates:/templates
+    depends_on:
+      - postgresql
+      - redis
