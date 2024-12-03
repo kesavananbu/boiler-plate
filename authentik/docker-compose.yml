@@ -30,6 +30,7 @@ services:
       AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-authentik}
       AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-authentik}
+      AUTHENTIK_LOG_LEVEL: warning
     volumes:
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
@@ -52,6 +53,7 @@ services:
       AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-authentik}
       AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-authentik}
+      AUTHENTIK_LOG_LEVEL: warning
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /volume1/docker/authentik/data/certs:/certs
