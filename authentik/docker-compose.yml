@@ -9,6 +9,8 @@ services:
     container_name: authentik
     restart: unless-stopped
     command: server
+    env_file:
+      - /data/secret.env #Portainer data folder
     environment:
       AUTHENTIK_REDIS__HOST: authentik-redis
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
@@ -16,7 +18,7 @@ services:
       AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_PG_DB:-authentik}
       AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-authentik}
-      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-authentik}
+      AUTHENTIK_BOOTSTRAP_PASSWORD: ${COMMON_PASSWORD:-authentik}
       AUTHENTIK_LOG_LEVEL: warning
     volumes:
       - /volume1/docker/authentik/data/media:/media
@@ -37,6 +39,8 @@ services:
     container_name: authentik-worker
     restart: unless-stopped
     command: worker
+    env_file:
+      - /data/secret.env #Portainer data folder
     environment:
       AUTHENTIK_REDIS__HOST: authentik-redis
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
@@ -44,7 +48,7 @@ services:
       AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_PG_DB:-authentik}
       AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-authentik}
-      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-authentik}
+      AUTHENTIK_BOOTSTRAP_PASSWORD: ${COMMON_PASSWORD:-authentik}
       AUTHENTIK_LOG_LEVEL: warning
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -65,6 +69,8 @@ services:
     restart: unless-stopped
     volumes:
       - /volume1/docker/authentik/db:/var/lib/postgresql/data
+    env_file:
+      - /data/secret.env #Portainer data folder
     environment:
       POSTGRES_PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
       POSTGRES_USER: ${AUTHENTIK_PG_USER:-authentik}
@@ -81,3 +87,7 @@ services:
       - /volume1/docker/authentik/redis:/data
     networks:
       - internal
+
+#echo "AUTHENTIK_PG_PASS=$(openssl rand -base64 36 | tr -d '\n')" >> .env
+#echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 60 | tr -d '\n')" >> .env
+#echo "AUTHENTIK_BOOTSTRAP_PASSWORD=$(openssl rand -base64 36 | tr -d '\n')" >> .env
