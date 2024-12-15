@@ -6,13 +6,14 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
+    environment:
+      TZ: Asia/Kolkata
     volumes:
       - /volume1/docker/jellyfin/config:/config
       - /volume1/Movies/cache:/cache
       - /volume1/Movies/Series:/data/tvshows
       - /volume1/Movies/Media:/data/movies #:ro
       - /etc/localtime:/etc/localtime:ro
-      - /etc/TZ:/etc/timezone:ro
     restart: unless-stopped
     networks:
       - internal
