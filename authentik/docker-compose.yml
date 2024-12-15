@@ -12,6 +12,7 @@ services:
     env_file:
       - /data/secret.env #Portainer data folder
     environment:
+      TZ: Asia/Kolkata
       AUTHENTIK_REDIS__HOST: authentik-redis
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
       AUTHENTIK_POSTGRESQL__USER: ${AUTHENTIK_PG_USER:-authentik}
@@ -26,7 +27,6 @@ services:
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
       - /etc/localtime:/etc/localtime:ro
-      - /etc/TZ:/etc/timezone:ro
     #ports:
     #  - "9010:9000"
     #  - "9011:9443"
@@ -44,6 +44,7 @@ services:
     env_file:
       - /data/secret.env #Portainer data folder
     environment:
+      TZ: Asia/Kolkata
       AUTHENTIK_REDIS__HOST: authentik-redis
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
       AUTHENTIK_POSTGRESQL__USER: ${AUTHENTIK_PG_USER:-authentik}
@@ -58,7 +59,6 @@ services:
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
       - /etc/localtime:/etc/localtime:ro
-      - /etc/TZ:/etc/timezone:ro
     depends_on:
       - authentik-postgresql
       - authentik-redis
