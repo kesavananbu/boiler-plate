@@ -10,6 +10,8 @@ services:
         restart: unless-stopped
         cap_add:
             - NET_ADMIN
+        environment:
+            TZ: Asia/Kolkata
         volumes:
             - /volume1/docker/AdGuardData/workdir:/opt/adguardhome/work
             - /volume1/docker/AdGuardData/confdir:/opt/adguardhome/conf
