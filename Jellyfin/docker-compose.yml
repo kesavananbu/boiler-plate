@@ -4,7 +4,7 @@ networks:
 
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:latest
     container_name: jellyfin
     volumes:
       - /volume1/docker/jellyfin/config:/config
