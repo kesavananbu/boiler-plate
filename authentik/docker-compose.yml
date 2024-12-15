@@ -1,3 +1,7 @@
+networks:
+    internal:
+      external: true
+      
 services:
   postgresql:
     image: docker.io/library/postgres:16-alpine
@@ -9,6 +13,8 @@ services:
       POSTGRES_PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
       POSTGRES_USER: ${AUTHENTIK_PG_USER:-authentik}
       POSTGRES_DB: ${AUTHENTIK_PG_DB:-authentik}
+    networks:
+      - internal
       
   redis:
     image: docker.io/library/redis:alpine
@@ -17,6 +23,9 @@ services:
     restart: unless-stopped
     volumes:
       - /volume1/docker/authentik/redis:/data
+    networks:
+      - internal
+      
   server:
     image: ghcr.io/goauthentik/server:latest
     container_name: authentik
@@ -34,12 +43,15 @@ services:
     volumes:
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
-    ports:
-      - "9010:9000"
-      - "9011:9443"
+    #ports:
+    #  - "9010:9000"
+    #  - "9011:9443"
     depends_on:
       - postgresql
       - redis
+    networks:
+      - internal
+      
   worker:
     image: ghcr.io/goauthentik/server:latest
     container_name: authentik-worker
@@ -62,3 +74,5 @@ services:
     depends_on:
       - postgresql
       - redis
+    networks:
+      - internal
