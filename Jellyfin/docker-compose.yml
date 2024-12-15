@@ -11,6 +11,7 @@ services:
       - /volume1/Movies/cache:/cache
       - /volume1/Movies/Series:/data/tvshows
       - /volume1/Movies/Media:/data/movies #:ro
+      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     networks:
       - internal
