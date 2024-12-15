@@ -21,6 +21,8 @@ services:
     volumes:
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     #ports:
     #  - "9010:9000"
     #  - "9011:9443"
@@ -49,6 +51,8 @@ services:
       - /volume1/docker/authentik/data/certs:/certs
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     depends_on:
       - authentik-postgresql
       - authentik-redis
