@@ -4,29 +4,6 @@ networks:
       
 services:     
 
-  postgresql:
-    image: docker.io/library/postgres:16-alpine
-    container_name: authentik-postgresql
-    restart: unless-stopped
-    volumes:
-      - /volume1/docker/authentik/db:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
-      POSTGRES_USER: ${AUTHENTIK_PG_USER:-authentik}
-      POSTGRES_DB: ${AUTHENTIK_PG_DB:-authentik}
-    networks:
-      - internal
-      
-  redis:
-    image: docker.io/library/redis:alpine
-    container_name: authentik-redis
-    command: --save 60 1 --loglevel warning
-    restart: unless-stopped
-    volumes:
-      - /volume1/docker/authentik/redis:/data
-    networks:
-      - internal
-
   server:
     image: ghcr.io/goauthentik/server:latest
     container_name: authentik
@@ -75,5 +52,28 @@ services:
     depends_on:
       - authentik-postgresql
       - authentik-redis
+    networks:
+      - internal
+
+  authentik-postgresql:
+    image: docker.io/library/postgres:16-alpine
+    container_name: authentik-postgresql
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/authentik/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
+      POSTGRES_USER: ${AUTHENTIK_PG_USER:-authentik}
+      POSTGRES_DB: ${AUTHENTIK_PG_DB:-authentik}
+    networks:
+      - internal
+      
+  authentik-redis:
+    image: docker.io/library/redis:alpine
+    container_name: authentik-redis
+    command: --save 60 1 --loglevel warning
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/authentik/redis:/data
     networks:
       - internal
