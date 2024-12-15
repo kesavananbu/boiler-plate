@@ -12,7 +12,7 @@ services:
       - /volume1/Movies/Series:/data/tvshows
       - /volume1/Movies/Media:/data/movies #:ro
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
+      - /etc/TZ:/etc/timezone:ro
     restart: unless-stopped
     networks:
       - internal
