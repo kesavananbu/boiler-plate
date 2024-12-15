@@ -35,4 +35,4 @@ services:
         #    - 3001:3000/udp
 
 
-# hostsfile_enabled: true Add this in config fiel
+# hostsfile_enabled: true Add this in config field
