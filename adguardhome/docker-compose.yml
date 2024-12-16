@@ -18,6 +18,7 @@ services:
             - /volume1/docker/AdGuardData/certdir:/opt/adguardhome/cert # For SSL Certificates path
             - /etc/localtime:/etc/localtime:ro
             - /etc/TZ:/etc/timezone:ro
+            - /etc/hosts:/etc/hosts:ro
         #ports:
         #    - 53:53/tcp
         #    - 53:53/udp
