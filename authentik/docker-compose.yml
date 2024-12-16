@@ -15,11 +15,11 @@ services:
       TZ: Asia/Kolkata
       AUTHENTIK_REDIS__HOST: authentik-redis
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
-      AUTHENTIK_POSTGRESQL__USER: ${AUTHENTIK_PG_USER:-authentik}
-      AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_PG_DB:-authentik}
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTH_PG_PASS:-authentik}
-      AUTHENTIK_SECRET_KEY: ${AUTH_SECRET_KEY:-authentik}
-      AUTHENTIK_BOOTSTRAP_PASSWORD: ${COMMON_PASSWORD:-authentik}
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      #AUTHENTIK_POSTGRESQL__PASSWORD: authentik
+      #AUTHENTIK_SECRET_KEY: authentik
+      #AUTHENTIK_BOOTSTRAP_PASSWORD: authentik
       AUTHENTIK_LOG_LEVEL: warning
       COMPOSE_PORT_HTTP: 80
       COMPOSE_PORT_HTTPS: 443
@@ -47,11 +47,11 @@ services:
       TZ: Asia/Kolkata
       AUTHENTIK_REDIS__HOST: authentik-redis
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
-      AUTHENTIK_POSTGRESQL__USER: ${AUTHENTIK_PG_USER:-authentik}
-      AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_PG_DB:-authentik}
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTH_PG_PASS:-authentik}
-      AUTHENTIK_SECRET_KEY: ${AUTH_SECRET_KEY:-authentik}
-      AUTHENTIK_BOOTSTRAP_PASSWORD: ${COMMON_PASSWORD:-authentik}
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      #AUTHENTIK_POSTGRESQL__PASSWORD: authentik
+      #AUTHENTIK_SECRET_KEY: authentik
+      #AUTHENTIK_BOOTSTRAP_PASSWORD: authentik
       AUTHENTIK_LOG_LEVEL: warning
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -74,9 +74,9 @@ services:
     env_file:
       - /data/secret.env #Portainer data folder
     environment:
-      POSTGRES_PASSWORD: ${AUTHENTIK_PG_PASS:-authentik}
-      POSTGRES_USER: ${AUTHENTIK_PG_USER:-authentik}
-      POSTGRES_DB: ${AUTHENTIK_PG_DB:-authentik}
+      #POSTGRES_PASSWORD: authentik
+      POSTGRES_USER: authentik
+      POSTGRES_DB: authentik
     networks:
       - internal
       
