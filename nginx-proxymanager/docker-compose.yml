@@ -15,3 +15,6 @@ services:
       #Replace the _access.conf file which used to generate the access list
       - /volume1/docker/proxymanager/custom/server_proxy.conf:/data/nginx/custom/server_proxy.conf
       - /volume1/docker/proxymanager/custom/custom_access.conf:/app/templates/_access.conf:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      TZ: Asia/Kolkata
