@@ -1,54 +1,71 @@
-version: '3.2'
-
+networks:
+    internal:
+      external: true
+      
 services:
-  db:
+  postgres:
     image: postgres
+    container_name: nextcloud-postgres
     restart: always
     volumes:
-      - /NextCloud/postgress:/var/lib/postgresql/data
+      - /volume1/docker/nextcloud/database:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
     environment:
       - POSTGRES_DB=nextcloud
-      - POSTGRES_USER=postgress
-      - POSTGRES_PASSWORD=postgress
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - TZ=Asia/Kolkata
+    networks:
+      - internal
         
-  app:
+  nextcloud:
     image: nextcloud
+    container_name: nextcloud
     restart: always
     env_file:
       - /data/secret.env
-    ports:
-      - 8090:80
+    #ports:
+    #  - 8090:80
     volumes:
-      - /NextCloud/nextcloud:/var/www/html
-      - /Media:/mnt/data/d1
+      - /volume1/docker/nextcloud/data:/var/www/html
+      - /volume1/homes:/mnt/data/d1
+      - /etc/localtime:/etc/localtime:ro
       #execute below script to get full access on external local storage
       #sudo chown -R www-data:www-data /Media
       #sudo chmod -R 0750 /Media
       #else execute this line alone for the folder
       #sudo chmod -R 777 /Media
     environment:
-      - POSTGRES_HOST=db
+      - TZ=Asia/Kolkata
+      - POSTGRES_HOST=nextcloud-postgres
       - POSTGRES_DB=nextcloud
-      - POSTGRES_USER=postgress
-      - POSTGRES_PASSWORD=postgress
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
       #- NEXTCLOUD_ADMIN_USER=username
       #- NEXTCLOUD_ADMIN_PASSWORD=password
-      - TRUSTED_PROXIES=swag
-      - OVERWRITEPROTOCOL=https
+      #- TRUSTED_PROXIES=swag
+      #- OVERWRITEPROTOCOL=https
       #- OVERWRITECLIURL=https://nextcloud.domainname
       #- OVERWRITEHOST=nextcloud.domainname
       #- NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.domainname
-
     depends_on:
-      - db
+      - postgres
+    networks:
+      - internal
       
   cron:
     image: nextcloud
+    container_name: nextcloud-cron
     restart: always
     volumes:
-      - /NextCloud/nextcloud:/var/www/html
+      - /volume1/docker/nextcloud/data:/var/www/html
+      - /etc/localtime:/etc/localtime:ro
     entrypoint: /cron.sh
+    environment:
+      - TZ=Asia/Kolkata
     depends_on:
-      - db
-      - app  
+      - postgres
+      - nextcloud  
+    networks:
+      - internal
       
