@@ -15,7 +15,7 @@ services:
         volumes:
             - /volume1/docker/AdGuardData/workdir:/opt/adguardhome/work
             - /volume1/docker/AdGuardData/confdir:/opt/adguardhome/conf
-            - /volume1/docker/AdGuardData/certdir:/opt/adguardhome/cert # For SSL Certificates path
+            - /volume1/docker/ssl_certs/host_domain:/opt/adguardhome/cert:ro
             - /etc/localtime:/etc/localtime:ro
             - /etc/TZ:/etc/timezone:ro
             - /etc/hosts:/etc/hosts:ro
