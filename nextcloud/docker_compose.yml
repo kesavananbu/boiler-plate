@@ -43,8 +43,8 @@ services:
       - POSTGRES_PASSWORD=postgres
       #- NEXTCLOUD_ADMIN_USER=username
       #- NEXTCLOUD_ADMIN_PASSWORD=password
-      #- TRUSTED_PROXIES=swag
-      #- OVERWRITEPROTOCOL=https
+      - TRUSTED_PROXIES=swag
+      - OVERWRITEPROTOCOL=https
       #- OVERWRITECLIURL=https://nextcloud.domainname
       #- OVERWRITEHOST=nextcloud.domainname
       #- NEXTCLOUD_TRUSTED_DOMAINS=nextcloud.domainname
