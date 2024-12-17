@@ -5,7 +5,9 @@ networks:
 services:
   jdownloader-2:
     container_name: jdownloader-2
-    network_mode: bridge
+    #network_mode: bridge
+    networks:
+      - internal
     image: jlesage/jdownloader-2:latest
     #ports:
     #  - 5800:5800
