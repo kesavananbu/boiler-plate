@@ -11,6 +11,7 @@ services:
     volumes:
       - /volume1/docker/proxymanager/data:/data
       - /volume1/docker/proxymanager/letsencrypt:/etc/letsencrypt
+      - /volume1/docker/ssl_certs/customdeployhook_nginx:/etc/letsencrypt/renewal-hooks/deploy
       #Advanced global config setup for authentik domain level forward proxy
       #Replace the _access.conf file which used to generate the access list
       - /volume1/docker/proxymanager/custom/server_proxy.conf:/data/nginx/custom/server_proxy.conf
