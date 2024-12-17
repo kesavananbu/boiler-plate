@@ -14,6 +14,7 @@ services:
       - /dev/dri:/dev/dri    
     environment:
       - NETDATA_EXTRA_DEB_PACKAGES=intel-gpu-tools
+      - TZ=Asia/Kolkata
     security_opt:
       - apparmor:unconfined
     volumes:
