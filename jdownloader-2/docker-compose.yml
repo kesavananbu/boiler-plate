@@ -1,18 +1,24 @@
+networks:
+    internal:
+      external: true
+      
 services:
   jdownloader-2:
     container_name: jdownloader-2
     network_mode: bridge
     image: jlesage/jdownloader-2:latest
-    ports:
-      - 5800:5800
+    #ports:
+    #  - 5800:5800
     volumes:
       - /volume1/docker/jdownloader2/config:/config:rw
       - /volume1/docker/jdownloader2/downloads:/output:rw
+      - /etc/localtime:/etc/localtime:ro
     env_file:
       - /data/secret.env #Portainer data folder
     environment: 
       SECURE_CONNECTION: 1
       WEB_AUTHENTICATION: 1
+      TZ: Asia/Kolkata
       #MYJDOWNLOADER_EMAIL: email@email.com #from the myjdownloader.org free account 
       #MYJDOWNLOADER_PASSWORD: password
       #MYJDOWNLOADER_DEVICE_NAME: name
