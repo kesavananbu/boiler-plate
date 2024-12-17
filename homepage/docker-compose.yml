@@ -1,19 +1,27 @@
+networks:
+    internal:
+      external: true
+      
 services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
-    network_mode: bridge
-    ports:
-      - 3001:3000
+    #network_mode: bridge
+    #ports:
+    #  - 3001:3000
     volumes:
       - /volume1/docker/homepage/config:/app/config
       - /volume1/docker/homepage/images:/app/public/images  
       - /volume1/docker/homepage/icons:/app/public/icons  
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
     env_file:
       - /data/secret.env #Portainer data folder
     environment:
       - LOG_LEVEL=debug
+      - TZ=Asia/Kolkata
     restart: unless-stopped
+    networks:
+      - internal
 
 #https://github.com/walkxcode/dashboard-icons/tree/main/png icons from this path for homepage
