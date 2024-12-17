@@ -3,8 +3,8 @@ networks:
       external: true
       
 services:
-  jdownloader-2:
-    container_name: jdownloader-2
+  jdownloader:
+    container_name: jdownloader
     #network_mode: bridge
     networks:
       - internal
