@@ -1,0 +1,22 @@
+networks:
+  smalldns:
+    external: true
+
+services:
+  smalldns:
+    build: .
+    container_name: smalldns
+    #network_mode: bridge
+    #ports:
+    #  - 5380:8080
+    #  - 53:53/udp
+    environment:
+      - TZ=Asia/Kolkata
+    volumes:
+      - /volume1/docker/lightdns/dnsmasq.conf:/etc/dnsmasq.conf
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/hosts:/etc/hosts:ro
+    networks:
+      smalldns:
+        ipv4_address: 172.25.0.2
+    restart: unless-stopped
