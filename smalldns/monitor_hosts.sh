@@ -18,7 +18,8 @@ while true; do
 
   CURRENT_TIME=$(date +%s)
   TIME_DIFF=$((CURRENT_TIME - LAST_MODIFIED_TIME))
-
+  
+  echo "DEBUG: TIME_DIFF=$TIME_DIFF, COOLDOWN=$COOLDOWN"
   echo "Modification detected: $TIME_DIFF seconds since last restart."
 
   if [ $TIME_DIFF -ge $COOLDOWN ]; then
