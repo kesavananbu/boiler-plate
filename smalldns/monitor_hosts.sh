@@ -23,6 +23,7 @@ while true; do
 
   if [ $TIME_DIFF -ge $COOLDOWN ]; then
     # If the cooldown period has passed, restart immediately
+    echo "DEBUG: Cooldown period passed. Calling restart_dnsmasq..."
     restart_dnsmasq
   elif [ "$RESTART_SCHEDULED" = false ]; then
     # Schedule a restart after the remaining cooldown time
