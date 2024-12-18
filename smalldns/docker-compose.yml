@@ -13,7 +13,7 @@ services:
     environment:
       - TZ=Asia/Kolkata
     volumes:
-      - /volume1/docker/lightdns/dnsmasq.conf:/etc/dnsmasq.conf
+      #- /volume1/docker/lightdns/dnsmasq.conf:/etc/dnsmasq.conf
       - /etc/localtime:/etc/localtime:ro
       - /etc/hosts:/etc/hosts:ro
     networks:
