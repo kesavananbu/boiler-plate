@@ -83,6 +83,7 @@ ldap:
       #AUTHENTIK_INSECURE: "false"
       #AUTHENTIK_TOKEN: token-generated-by-authentik
 
+      
   authentik-postgresql:
     image: docker.io/library/postgres:16-alpine
     container_name: authentik-postgresql
