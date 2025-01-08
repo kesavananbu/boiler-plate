@@ -69,9 +69,9 @@ services:
     image: ghcr.io/goauthentik/ldap:latest
     container_name: authentik-ldap
     restart: unless-stopped
-    #ports:
-    #- 389:3389
-    #- 636:6636
+    ports:
+    - 389:3389
+    - 636:6636
     env_file:
       - /data/secret.env #Portainer data folder
     networks:
