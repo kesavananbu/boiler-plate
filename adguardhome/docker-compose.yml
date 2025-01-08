@@ -17,6 +17,7 @@ services:
             - /volume1/docker/AdGuardData/confdir:/opt/adguardhome/conf
             - /volume1/docker/ssl_certs/host_domain:/opt/adguardhome/cert:ro
             - /etc/localtime:/etc/localtime:ro
+            - /volume1/docker/AdGuardData/confdir/hosts:/etc/hosts:ro
         #ports:
         #    - 53:53/tcp
         #    - 53:53/udp
