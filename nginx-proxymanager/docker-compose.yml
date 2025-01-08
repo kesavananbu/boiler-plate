@@ -18,6 +18,6 @@ services:
       - /volume1/docker/proxymanager/custom/server_proxy.conf:/data/nginx/custom/server_proxy.conf
       - /volume1/docker/proxymanager/custom/custom_access.conf:/app/templates/_access.conf:ro
       - /etc/localtime:/etc/localtime:ro
-      #- /etc/hosts:/etc/hosts:ro
+      - /etc/hosts:/etc/hosts:ro
     environment:
       TZ: Asia/Kolkata
