@@ -53,6 +53,7 @@ services:
       #AUTHENTIK_SECRET_KEY: authentik
       #AUTHENTIK_BOOTSTRAP_PASSWORD: authentik
       AUTHENTIK_LOG_LEVEL: warning
+      user: root
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /volume1/docker/authentik/data/certs:/certs
