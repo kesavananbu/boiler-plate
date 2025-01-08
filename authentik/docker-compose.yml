@@ -65,6 +65,24 @@ services:
     networks:
       - internal
 
+    ldap:
+        image: ghcr.io/goauthentik/ldap:latest
+        container_name: authentik-ldap
+        restart: unless-stopped
+        ports:
+            - 389:3389
+            - 636:6636
+        env_file:
+            - /data/secret.env #Portainer data folder
+        networks:
+           - internal
+        depends_on:
+           - server
+        #environment:
+            #AUTHENTIK_HOST: https://your-authentik.tld
+            #AUTHENTIK_INSECURE: "false"
+            #AUTHENTIK_TOKEN: token-generated-by-authentik
+
   authentik-postgresql:
     image: docker.io/library/postgres:16-alpine
     container_name: authentik-postgresql
