@@ -18,7 +18,7 @@ services:
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
       #AUTHENTIK_POSTGRESQL__PASSWORD: authentik
-      #AUTHENTIK_SECRET_KEY: authentik
+      #AUTHENTIK_SECRET_KEY: authentikn
       #AUTHENTIK_BOOTSTRAP_PASSWORD: authentik
       AUTHENTIK_LOG_LEVEL: warning
       COMPOSE_PORT_HTTP: 80
@@ -65,7 +65,7 @@ services:
     networks:
       - internal
 
-ldap:
+  ldap:
     image: ghcr.io/goauthentik/ldap:latest
     container_name: authentik-ldap
     restart: unless-stopped
