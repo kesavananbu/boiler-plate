@@ -68,23 +68,23 @@ services:
     networks:
       - internal
 
-  ldap:
-    image: ghcr.io/goauthentik/ldap:latest
-    container_name: authentik-ldap
-    restart: unless-stopped
-    ports:
-      - "389:3389"
-      - "636:6636"
-    #env_file:
-    #  - /data/secret.env #Portainer data folder
-    networks:
-      - internal
-    depends_on:
-      - server
-    environment:
-      AUTHENTIK_HOST: https://authentik:9443/
-      AUTHENTIK_INSECURE: "true"
-      AUTHENTIK_TOKEN: LN3ZfpgHqwsQLh3hilZO8TK05LIiqA5OEsU39o6D8IaTZbgndGF6K5wW5GRW
+  #ldap:
+  #  image: ghcr.io/goauthentik/ldap:latest
+  #  container_name: authentik-ldap
+  #  restart: unless-stopped
+  #  ports:
+  #    - "389:3389"
+  #    - "636:6636"
+  #  #env_file:
+  #  #  - /data/secret.env #Portainer data folder
+  #  networks:
+  #    - internal
+  #  depends_on:
+  #    - server
+  #  environment:
+  #    AUTHENTIK_HOST: https://authentik:9443/
+  #    AUTHENTIK_INSECURE: "true"
+  #    AUTHENTIK_TOKEN: LN3ZfpgHqwsQLh3hilZO8TK05LIiqA5OEsU39o6D8IaTZbgndGF6K5wW5GRW
 
       
   authentik-postgresql:
