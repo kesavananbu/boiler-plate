@@ -23,7 +23,9 @@ services:
       AUTHENTIK_LOG_LEVEL: warning
       COMPOSE_PORT_HTTP: 80
       COMPOSE_PORT_HTTPS: 443
+      user: root
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
       - /etc/localtime:/etc/localtime:ro
