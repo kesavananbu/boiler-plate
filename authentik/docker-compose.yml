@@ -23,9 +23,9 @@ services:
       AUTHENTIK_LOG_LEVEL: warning
       COMPOSE_PORT_HTTP: 80
       COMPOSE_PORT_HTTPS: 443
-      user: root
+      #user: root
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      #- /var/run/docker.sock:/var/run/docker.sock
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
       - /etc/localtime:/etc/localtime:ro
@@ -55,9 +55,9 @@ services:
       #AUTHENTIK_SECRET_KEY: authentik
       #AUTHENTIK_BOOTSTRAP_PASSWORD: authentik
       AUTHENTIK_LOG_LEVEL: warning
-      user: root
+      #user: root
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      #- /var/run/docker.sock:/var/run/docker.sock
       - /volume1/docker/authentik/data/certs:/certs
       - /volume1/docker/authentik/data/media:/media
       - /volume1/docker/authentik/data/templates:/templates
@@ -68,23 +68,23 @@ services:
     networks:
       - internal
 
-  #ldap:
-    #image: ghcr.io/goauthentik/ldap:latest
-    #container_name: authentik-ldap
-    #restart: unless-stopped
-    #ports:
-    #- 389:3389
-    #- 636:6636
+  ldap:
+    image: ghcr.io/goauthentik/ldap:latest
+    container_name: authentik-ldap
+    restart: unless-stopped
+    ports:
+    - 389:3389
+    - 636:6636
     #env_file:
     #  - /data/secret.env #Portainer data folder
-    #networks:
-    #  - internal
-    #depends_on:
-    #  - server
-    #environment:
-      #AUTHENTIK_HOST: https://your-authentik.tld
-      #AUTHENTIK_INSECURE: "false"
-      #AUTHENTIK_TOKEN: token-generated-by-authentik
+    networks:
+      - internal
+    depends_on:
+      - server
+    environment:
+      AUTHENTIK_HOST: https://authentik:9443/
+      AUTHENTIK_INSECURE: "false"
+      AUTHENTIK_TOKEN: LN3ZfpgHqwsQLh3hilZO8TK05LIiqA5OEsU39o6D8IaTZbgndGF6K5wW5GRW
 
       
   authentik-postgresql:
