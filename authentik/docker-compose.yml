@@ -75,16 +75,16 @@ services:
     ports:
       - "389:3389"
       - "636:6636"
-    #env_file:
-    #  - /data/secret.env #Portainer data folder
+    env_file:
+      - /data/secret.env #Portainer data folder
     networks:
       - internal
     depends_on:
       - server
-    environment:
-      AUTHENTIK_HOST: https://authentik:9443/
-      AUTHENTIK_INSECURE: "true"
-      AUTHENTIK_TOKEN: O3vFsYIjbc3vjKkFL9ecDtedoO7TTBxTbfrGyVE7EhcIiuXU7ZsPz4dMhKcU
+    #environment:
+    #  AUTHENTIK_HOST: https://authentik:9443/
+    #  AUTHENTIK_INSECURE: "true"
+    #  AUTHENTIK_TOKEN: REPLACE_TOKEN
 
       
   authentik-postgresql:
