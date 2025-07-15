@@ -20,6 +20,7 @@ services:
     environment:
       - LOG_LEVEL=debug
       - TZ=Asia/Kolkata
+      - HOMEPAGE_ALLOWED_HOSTS=*
     restart: unless-stopped
     networks:
       - internal
