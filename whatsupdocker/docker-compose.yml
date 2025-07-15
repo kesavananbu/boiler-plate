@@ -9,5 +9,7 @@ services:
       - TZ=Asia/Kolkata
       - WUD_WATCHER_LOCAL_CRON=0 1 * * *
       - WUD_WATCHER_LOCAL_WATCHBYDEFAULT=true
+      - WUD_TRIGGER_DOCKER_LOCAL_PRUNE=true
+      - WUD_TRIGGER_DOCKER_LOCAL_AUTO=false
     #ports:
       #- 3000:3000
