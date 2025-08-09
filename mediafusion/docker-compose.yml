@@ -33,7 +33,7 @@ services:
       - dramatiq-worker
     restart: unless-stopped
     networks:
-      - mediafusion_network
+      - internal
 
   dramatiq-worker:
     image: mhdzumair/mediafusion:4.3.33
@@ -69,14 +69,14 @@ services:
       - redis
     restart: unless-stopped
     networks:
-      - mediafusion_network
+      - internal
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
     restart: unless-stopped
     networks:
-      - mediafusion_network
+      - internal
 
   browserless:
     image: ghcr.io/browserless/chromium
@@ -85,32 +85,28 @@ services:
       - TIMEOUT=-1
     restart: unless-stopped
     networks:
-      - mediafusion_network
+      - internal
 
   redis:
     image: redis:latest
     container_name: redis
     volumes:
-      - redis-data:/data
+      - /volume1/docker/mediafusion/redis:/data
     command: redis-server --appendonly yes --save 60 1
     restart: unless-stopped
     networks:
-      - mediafusion_network
+      - internal
 
 #Commented out using mongodb cloud db certain features required latest version. Local Machine not comptaible to support mongodb latest.
 #mongodb:
 #  image: mongo:4.4.29
 #  container_name: mongodb
 #  volumes:
-#    - mongo-data:/data/db
+#    - /volume1/docker/mediafusion/mongo:/data/db
 #  restart: unless-stopped
 #  networks:
 #    - mediafusion_network
 
-volumes:
-  #mongo-data:
-  redis-data:
-
 networks:
-  mediafusion_network:
-    driver: bridge
+    internal:
+      external: true
