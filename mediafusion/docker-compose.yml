@@ -2,6 +2,8 @@ services:
   mediafusion:
     image: mhdzumair/mediafusion:4.3.33
     container_name: mediafusion
+    env_file:
+      - /data/secret.env #Portainer data folder
     environment:
       #- SECRET_KEY=secret_key
       #- API_PASSWORD=app_password
@@ -39,6 +41,8 @@ services:
     image: mhdzumair/mediafusion:4.3.33
     container_name: mediafusion-worker
     command: ["dramatiq", "api.task", "-p", "1", "-t", "4"]
+    env_file:
+      - /data/secret.env #Portainer data folder
     environment:
       #- SECRET_KEY=secret_key
       #- API_PASSWORD=app_password
