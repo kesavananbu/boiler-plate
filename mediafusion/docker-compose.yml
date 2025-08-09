@@ -1,0 +1,116 @@
+services:
+  mediafusion:
+    image: mhdzumair/mediafusion:4.3.33
+    container_name: mediafusion
+    environment:
+      #- SECRET_KEY=secret_key
+      #- API_PASSWORD=app_password
+      - HOST_URL=http://mediafusion:8000
+      - POSTER_HOST_URL=http://mediafusion:8000
+      - FLARESOLVERR_HOST=http://flaresolverr:8191
+      #- MONGO_URI=mongodb://mongodb:27017/mediafusion
+      - REDIS_URL=redis://redis:6379
+      - ENABLE_RATE_LIMIT=false
+      - is_scrap_from_mediafusion=False
+      - is_scrap_from_zilean=False
+      - is_scrap_from_prowlarr=False
+      - is_scrap_from_bt4g=False
+      - store_stremthru_magnet_cache=False
+      - disable_tamil_blasters_scheduler=False
+      - disable_tamilmv_scheduler=False
+      - disable_tamilultra_scheduler=False
+      - disable_sport_video_scheduler=True
+      - disable_arab_torrents_scheduler=True
+      - disable_dlhd_scheduler=True
+      - cleanup_expired_scraper_task_crontab=0 * * * *
+      - cleanup_expired_cache_task_crontab=0 * * * *
+      - tamil_blasters_scheduler_crontab=0 * * * *
+      - tamilmv_scheduler_crontab=20 * * * *
+      - tamilultra_scheduler_crontab=40 * * * *
+    depends_on:
+      #- mongodb
+      - redis
+      - dramatiq-worker
+    restart: unless-stopped
+    networks:
+      - mediafusion_network
+
+  dramatiq-worker:
+    image: mhdzumair/mediafusion:4.3.33
+    container_name: mediafusion-worker
+    command: ["dramatiq", "api.task", "-p", "1", "-t", "4"]
+    environment:
+      #- SECRET_KEY=secret_key
+      #- API_PASSWORD=app_password
+      - HOST_URL=http://mediafusion:8000
+      - POSTER_HOST_URL=http://mediafusion:8000
+      - FLARESOLVERR_HOST=http://flaresolverr:8191
+      #- MONGO_URI=mongodb://mongodb:27017/mediafusion
+      - REDIS_URL=redis://redis:6379
+      - ENABLE_RATE_LIMIT=false
+      - is_scrap_from_mediafusion=False
+      - is_scrap_from_zilean=False
+      - is_scrap_from_prowlarr=False
+      - is_scrap_from_bt4g=False
+      - store_stremthru_magnet_cache=False
+      - disable_tamil_blasters_scheduler=False
+      - disable_tamilmv_scheduler=False
+      - disable_tamilultra_scheduler=False
+      - disable_sport_video_scheduler=True
+      - disable_arab_torrents_scheduler=True
+      - disable_dlhd_scheduler=True
+      - cleanup_expired_scraper_task_crontab=0 * * * *
+      - cleanup_expired_cache_task_crontab=0 * * * *
+      - tamil_blasters_scheduler_crontab=0 * * * *
+      - tamilmv_scheduler_crontab=20 * * * *
+      - tamilultra_scheduler_crontab=40 * * * *
+    depends_on:
+      #- mongodb
+      - redis
+    restart: unless-stopped
+    networks:
+      - mediafusion_network
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    networks:
+      - mediafusion_network
+
+  browserless:
+    image: ghcr.io/browserless/chromium
+    container_name: browserless
+    environment:
+      - TIMEOUT=-1
+    restart: unless-stopped
+    networks:
+      - mediafusion_network
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes --save 60 1
+    restart: unless-stopped
+    networks:
+      - mediafusion_network
+
+#Commented out using mongodb cloud db certain features required latest version. Local Machine not comptaible to support mongodb latest.
+#mongodb:
+#  image: mongo:4.4.29
+#  container_name: mongodb
+#  volumes:
+#    - mongo-data:/data/db
+#  restart: unless-stopped
+#  networks:
+#    - mediafusion_network
+
+volumes:
+  #mongo-data:
+  redis-data:
+
+networks:
+  mediafusion_network:
+    driver: bridge
