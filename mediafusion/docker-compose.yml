@@ -39,7 +39,7 @@ services:
     depends_on:
       #- mongodb
       - redis
-      - dramatiq-worker
+      #- dramatiq-worker
     restart: unless-stopped
     networks:
       - internal
