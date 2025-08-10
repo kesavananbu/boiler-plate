@@ -18,3 +18,7 @@ services:
     networks:
       - internal
     ##use public ip or local ip first dont use reverse proxy. And disable CSRF protection.
+
+networks:
+    internal:
+      external: true
