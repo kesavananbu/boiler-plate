@@ -115,6 +115,21 @@ services:
     networks:
       - internal
 
+  qbittorrentwebdav:
+    image: mhdzumair/qbittorrent-webdav:latest
+    container_name: qbittorrentwebdav
+    restart: unless-stopped
+    ports:
+      - "8080:8082"
+      - "6881:6881/tcp"
+      - "6881:6881/udp"
+    volumes:
+      # Optional: WebDAV password protection
+      #- /path/to/htpasswd:/etc/apache2/.htpasswd
+      - /volume1/Movies/Media/downloads:/downloads
+    networks:
+      - internal
+
 #Commented out using mongodb cloud db certain features required latest version. Local Machine not comptaible to support mongodb latest.
 #mongodb:
 #  image: mongo:4.4.29
