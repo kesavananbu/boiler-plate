@@ -127,7 +127,7 @@ services:
       # Optional: WebDAV password protection
       #- /path/to/htpasswd:/etc/apache2/.htpasswd
       - /volume1/Movies/Media/downloads:/downloads
-      - /volume1/docker/mediafusion/qbittorrent/config:/config
+      - /volume1/docker/mediafusion/qbittorrentwebdav/config:/config
     networks:
       - internal
 
