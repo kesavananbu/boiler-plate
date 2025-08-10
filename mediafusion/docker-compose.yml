@@ -5,6 +5,8 @@ services:
     command: >
       sh -c "sed -i
       's|https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/json/scraper_config.json|https://raw.githubusercontent.com/kesavananbu/MediaFusion/main/resources/json/scraper_config.json|g' /mediafusion/db/config.py
+      && echo '==== FILE CONTENTS AFTER REPLACE ===='
+      && cat /mediafusion/db/config.py
       && /mediafusion/deployment/startup.sh"
     env_file:
       - /data/secret.env #Portainer data folder
@@ -48,6 +50,8 @@ services:
     command: >
       sh -c "sed -i
       's|https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/json/scraper_config.json|https://raw.githubusercontent.com/kesavananbu/MediaFusion/main/resources/json/scraper_config.json|g' /mediafusion/db/config.py
+      && echo '==== FILE CONTENTS AFTER REPLACE ===='
+      && cat /mediafusion/db/config.py
       && dramatiq api.task -p 1 -t 4"
     env_file:
       - /data/secret.env #Portainer data folder
