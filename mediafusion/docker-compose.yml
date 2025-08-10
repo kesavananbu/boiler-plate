@@ -120,7 +120,7 @@ services:
     container_name: qbittorrentwebdav
     restart: unless-stopped
     environment:
-      - WEBUI_PORT=8083
+      - QBT_WEBUI_PORT=8083
     ports:
       - "8083:8083"
       - "6881:6881/tcp"
