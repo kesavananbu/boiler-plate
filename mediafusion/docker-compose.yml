@@ -115,23 +115,23 @@ services:
     networks:
       - internal
 
-  qbittorrentwebdav:
-    image: mhdzumair/qbittorrent-webdav:latest
-    container_name: qbittorrentwebdav
-    restart: unless-stopped
-    environment:
-      - QBT_WEBUI_PORT=8083
-    ports:
-      - "8083:8083"
-      - "6881:6881/tcp"
-      - "6881:6881/udp"
-    volumes:
-      # Optional: WebDAV password protection
-      #- /path/to/htpasswd:/etc/apache2/.htpasswd
-      - /volume1/Movies/Media/downloads:/downloads
-      - /volume1/docker/mediafusion/qbittorrentwebdav/config:/config
-    networks:
-      - internal
+  #qbittorrentwebdav:
+  #  image: mhdzumair/qbittorrent-webdav:latest
+  #  container_name: qbittorrentwebdav
+  #  restart: unless-stopped
+  #  environment:
+  #    - QBT_WEBUI_PORT=8083
+  #  ports:
+  #    - "8083:8083"
+  #    - "6881:6881/tcp"
+  #    - "6881:6881/udp"
+  #  volumes:
+  #    # Optional: WebDAV password protection
+  #    #- /path/to/htpasswd:/etc/apache2/.htpasswd
+  #    - /volume1/Movies/Media/downloads:/downloads
+  #    - /volume1/docker/mediafusion/qbittorrentwebdav/config:/config
+  #  networks:
+  #    - internal
 
 #Commented out using mongodb cloud db certain features required latest version. Local Machine not comptaible to support mongodb latest.
 #mongodb:
