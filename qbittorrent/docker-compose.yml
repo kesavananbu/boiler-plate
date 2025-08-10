@@ -6,14 +6,14 @@ services:
       #- PUID=1000
       #- PGID=1000
       - TZ=Asia/Kolkata
-      - WEBUI_PORT=8082
+      #- WEBUI_PORT=8082
     volumes:
       - /volume1/docker/qbittorrent/config:/config
       - /volume1/Movies/Media/downloads:/downloads
-    ports:
-      - 6881:6881
-      - 6881:6881/udp
-      - 8082:8082
+    #ports:
+      #- 6881:6881
+      #- 6881:6881/udp
+      #- 8082:8082
     restart: unless-stopped
     networks:
       - internal
