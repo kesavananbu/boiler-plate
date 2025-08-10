@@ -7,6 +7,7 @@ services:
       #- PGID=1000
       - TZ=Asia/Kolkata
       - WEBUI_PORT=8082
+      - QBT_WEBUI_NO_CSRF_CHECK=true # Disables CSRF protection
     volumes:
       - /volume1/docker/qbittorrent/config:/config
       - /volume1/Movies/Media/downloads:/downloads
