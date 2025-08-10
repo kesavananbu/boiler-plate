@@ -2,7 +2,6 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
-    network_mode: bridge
     environment:
       #- PUID=1000
       #- PGID=1000
@@ -16,4 +15,6 @@ services:
       - 6881:6881/udp
       - 8082:8082
     restart: unless-stopped
+    networks:
+      - internal
     ##use public ip or local ip first dont use reverse proxy. And disable CSRF protection.
