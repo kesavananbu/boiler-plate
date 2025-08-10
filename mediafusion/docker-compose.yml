@@ -2,6 +2,10 @@ services:
   mediafusion:
     image: mhdzumair/mediafusion:4.3.33
     container_name: mediafusion
+    command: >
+      sh -c "find /app -type f -exec sed -i
+      's|https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/json/scraper_config.json|https://raw.githubusercontent.com/kesavananbu/MediaFusion/main/resources/json/scraper_config.json|g' {} +
+      && /mediafusion/deployment/startup.sh"
     env_file:
       - /data/secret.env #Portainer data folder
     environment:
@@ -40,7 +44,11 @@ services:
   dramatiq-worker:
     image: mhdzumair/mediafusion:4.3.33
     container_name: mediafusion-worker
-    command: ["dramatiq", "api.task", "-p", "1", "-t", "4"]
+    #command: ["dramatiq", "api.task", "-p", "1", "-t", "4"]
+    command: >
+      sh -c "find /app -type f -exec sed -i
+      's|https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/json/scraper_config.json|https://raw.githubusercontent.com/kesavananbu/MediaFusion/main/resources/json/scraper_config.json|g' {} +
+      && dramatiq api.task -p 1 -t 4"
     env_file:
       - /data/secret.env #Portainer data folder
     environment:
