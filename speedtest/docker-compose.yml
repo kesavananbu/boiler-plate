@@ -10,7 +10,7 @@ services:
             - APP_TIMEZONE=Asia/Kolkata
             - DISPLAY_TIMEZONE=Asia/Kolkata
             #- PUBLIC_DASHBOARD=true
-            - SPEEDTEST_SCHEDULE=0 */3 * * * # optional: schedule a speedtest with an cronjob https://crontab.guru
+            - SPEEDTEST_SCHEDULE=0 0 * * * # optional: schedule a speedtest with an cronjob https://crontab.guru
         volumes:
             - /volume1/docker/speedtest:/config
             - /etc/localtime:/etc/localtime:ro
