@@ -21,3 +21,4 @@ services:
       - /etc/hosts:/etc/hosts:ro
     environment:
       TZ: Asia/Kolkata
+      SKIP_CERTBOT_OWNERSHIP: true
