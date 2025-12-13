@@ -6,8 +6,8 @@ services:
       - /data/secret.env #Portainer data folder
     environment:
       - TZ=Asia/Kolkata
-      - PUID=1000
-      - PGID=1000
+      #- PUID=1000
+      #- PGID=1000
     volumes:
       - /volume1/docker/rclone/config:/config/rclone
       - /volume1/docker/rclone/data:/data
