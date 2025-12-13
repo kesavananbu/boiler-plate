@@ -6,6 +6,8 @@ services:
       - /data/secret.env #Portainer data folder
     environment:
       - TZ=Asia/Kolkata
+      - RCLONE_RC_USER=${RCLONE_USER}
+      - RCLONE_RC_PASS=${RCLONE_PASS}
       #- PUID=1000
       #- PGID=1000
     volumes:
@@ -14,7 +16,7 @@ services:
     #ports:
       #- 5572:5572
     restart: unless-stopped
-    command: rcd --rc-web-gui --rc-addr :5572 --rc-user ${RCLONE_USER} --rc-pass ${RCLONE_PASS} --rc-serve
+    command: rcd --rc-web-gui --rc-web-gui-no-open-browser --rc-addr :5572 --rc-serve
     networks:
       - internal
 
