@@ -13,6 +13,7 @@ services:
     ports:
       - 5572:5572
     restart: unless-stopped
+    # Change the --rc-pass value to a secure password before deployment
     command: rcd --rc-web-gui --rc-addr :5572 --rc-user admin --rc-pass changeme --rc-serve
     networks:
       - internal
