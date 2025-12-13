@@ -11,11 +11,10 @@ services:
     volumes:
       - /volume1/docker/rclone/config:/config/rclone
       - /volume1/docker/rclone/data:/data
-      - /volume1/Movies:/media:shared
     ports:
       - 5572:5572
     restart: unless-stopped
-    command: rcd --rc-web-gui --rc-addr :5572 --rc-user ${RCLONE_USER:-admin} --rc-pass ${RCLONE_PASS:-changeme} --rc-serve
+    command: rcd --rc-web-gui --rc-addr :5572 --rc-user ${RCLONE_USER} --rc-pass ${RCLONE_PASS} --rc-serve
     networks:
       - internal
 
