@@ -2,6 +2,8 @@ services:
   rclone:
     image: rclone/rclone:latest
     container_name: rclone
+    env_file:
+      - /data/secret.env #Portainer data folder
     environment:
       - TZ=Asia/Kolkata
       - PUID=1000
@@ -13,8 +15,7 @@ services:
     ports:
       - 5572:5572
     restart: unless-stopped
-    # Change the --rc-pass value to a secure password before deployment
-    command: rcd --rc-web-gui --rc-addr :5572 --rc-user admin --rc-pass changeme --rc-serve
+    command: rcd --rc-web-gui --rc-addr :5572 --rc-user ${RCLONE_USER:-admin} --rc-pass ${RCLONE_PASS:-changeme} --rc-serve
     networks:
       - internal
 
