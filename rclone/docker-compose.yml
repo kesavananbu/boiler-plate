@@ -1,0 +1,22 @@
+services:
+  rclone:
+    image: rclone/rclone:latest
+    container_name: rclone
+    environment:
+      - TZ=Asia/Kolkata
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /volume1/docker/rclone/config:/config/rclone
+      - /volume1/docker/rclone/data:/data
+      - /volume1/Movies:/media:shared
+    ports:
+      - 5572:5572
+    restart: unless-stopped
+    command: rcd --rc-web-gui --rc-addr :5572 --rc-user admin --rc-pass changeme --rc-serve
+    networks:
+      - internal
+
+networks:
+  internal:
+    external: true
