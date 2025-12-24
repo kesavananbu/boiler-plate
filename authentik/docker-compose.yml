@@ -5,7 +5,7 @@ networks:
 services:     
 
   server:
-    image: ghcr.io/goauthentik/server:latest
+    image: ghcr.io/goauthentik/server:2025.4.4
     container_name: authentik
     restart: unless-stopped
     command: server
@@ -39,7 +39,7 @@ services:
       - internal
       
   worker:
-    image: ghcr.io/goauthentik/server:latest
+    image: ghcr.io/goauthentik/server:2025.4.4
     container_name: authentik-worker
     restart: unless-stopped
     command: worker
@@ -69,7 +69,7 @@ services:
       - internal
 
   ldap:
-    image: ghcr.io/goauthentik/ldap:latest
+    image: ghcr.io/goauthentik/ldap:2025.4.4
     container_name: authentik-ldap
     restart: unless-stopped
     ports:
