@@ -5,7 +5,7 @@ networks:
 services:     
 
   server:
-    image: ghcr.io/goauthentik/server:2025.8.5
+    image: ghcr.io/goauthentik/server:2025.10.3
     container_name: authentik
     restart: unless-stopped
     command: server
@@ -13,7 +13,7 @@ services:
       - /data/secret.env #Portainer data folder
     environment:
       TZ: Asia/Kolkata
-      AUTHENTIK_REDIS__HOST: authentik-redis
+      #AUTHENTIK_REDIS__HOST: authentik-redis
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
@@ -34,12 +34,12 @@ services:
     #  - "9011:9443"
     depends_on:
       - authentik-postgresql
-      - authentik-redis
+      #- authentik-redis
     networks:
       - internal
       
   worker:
-    image: ghcr.io/goauthentik/server:2025.8.5
+    image: ghcr.io/goauthentik/server:2025.10.3
     container_name: authentik-worker
     restart: unless-stopped
     command: worker
@@ -47,7 +47,7 @@ services:
       - /data/secret.env #Portainer data folder
     environment:
       TZ: Asia/Kolkata
-      AUTHENTIK_REDIS__HOST: authentik-redis
+      #AUTHENTIK_REDIS__HOST: authentik-redis
       AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
@@ -64,12 +64,12 @@ services:
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - authentik-postgresql
-      - authentik-redis
+      #- authentik-redis
     networks:
       - internal
 
   ldap:
-    image: ghcr.io/goauthentik/ldap:2025.8.5
+    image: ghcr.io/goauthentik/ldap:2025.10.3
     container_name: authentik-ldap
     restart: unless-stopped
     ports:
@@ -102,15 +102,15 @@ services:
     networks:
       - internal
       
-  authentik-redis:
-    image: docker.io/library/redis:alpine
-    container_name: authentik-redis
-    command: --save 60 1 --loglevel warning
-    restart: unless-stopped
-    volumes:
-      - /volume1/docker/authentik/redis:/data
-    networks:
-      - internal
+  #authentik-redis:
+  #  image: docker.io/library/redis:alpine
+  #  container_name: authentik-redis
+  #  command: --save 60 1 --loglevel warning
+  #  restart: unless-stopped
+  #  volumes:
+  #    - /volume1/docker/authentik/redis:/data
+  #  networks:
+  #    - internal
 
 #echo "AUTHENTIK_PG_PASS=$(openssl rand -base64 36 | tr -d '\n')" >> .env
 #echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 60 | tr -d '\n')" >> .env
