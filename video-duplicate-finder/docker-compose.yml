@@ -1,0 +1,21 @@
+networks:
+    internal:
+      external: true
+      
+services:
+  video-duplicate-finder:
+    image: jlesage/video-duplicate-finder:latest
+    container_name: video-duplicate-finder
+    #ports:
+      #- "5800:5800"   # GUI accessible in browser
+      # - "5900:5900" # Optional: VNC access (uncomment if needed)
+    networks:
+      - internal
+    environment:
+      TZ: "Asia/Kolkata"
+      DARK_MODE: "1"       # optional
+    volumes:
+      - /volume1/docker/duplicate_finder/video-duplicate-finder/config:/config
+      - /volume1/homes/work/Private:/storage:rw
+    restart: unless-stopped
+
