@@ -12,8 +12,8 @@ services:
     networks:
       - internal
     environment:
-      USER_ID: "1026"        # your Linux user 
-      GROUP_ID: "100"        # your primary group
+      USER_ID: "1029"        # your Linux user 
+      GROUP_ID: "105733"        # your primary group
       TZ: "Asia/Kolkata"
       DARK_MODE: "1"       # optional
     volumes:
