@@ -19,5 +19,9 @@ services:
     volumes:
       - /volume1/docker/duplicate_finder/video-duplicate-finder/config:/config
       - /volume1/homes/work/Private:/storage:ro #:rw
+    devices: #include only if you have intel/amd gpu
+      - /dev/dri/:/dev/dri/
+      #- /dev/dri/renderD128:/dev/dri/renderD128
+      #- /dev/dri/card0:/dev/dri/card0
     restart: unless-stopped
 
