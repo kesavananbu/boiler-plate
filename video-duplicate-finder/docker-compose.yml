@@ -18,6 +18,6 @@ services:
       DARK_MODE: "1"       # optional
     volumes:
       - /volume1/docker/duplicate_finder/video-duplicate-finder/config:/config
-      - /volume1/homes/work/Private:/storage #:rw
+      - /volume1/homes/work/Private:/storage:ro #:rw
     restart: unless-stopped
 
