@@ -6,7 +6,7 @@ services:
       - /dev/dri:/dev/dri
     volumes:
       - /volume1/immich_data:/data
-      - /volume1/homes/kesavananbu:/mnt/media/backup_photoshoot:ro
+      - /volume1/homes/kesavananbu/Backups:/mnt/media/backups:ro
       - /etc/localtime:/etc/localtime:ro
     environment:
       TZ: Asia/Kolkata
