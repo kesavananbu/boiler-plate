@@ -1,29 +1,38 @@
 #!/bin/bash
+set -e
+
 NPMALIAS="npm-8"
 DOMAIN="host_domain"
-dateF=$(date +%Y-%m)
-certFile=cert
-keyFile=key
+DATE=$(date +%Y-%m-%d_%H-%M-%S)
 
-#Check if correct renewed cert
-#[[ $RENEWED_LINEAGE != "/etc/letsencrypt/live/$NPMALIAS" ]] && exit 0
+CERT_DIR="/data/certs/$DOMAIN"
+ARCHIVE_DIR="$CERT_DIR/archive"
+CERT_FILE="cert.pem"
+KEY_FILE="key.pem"
 
-#Backup existing certs
-echo "Backing up certs"
-if [ -f /data/certs/$DOMAIN/$certFile.pem ]; then
-    #Check if certs exist
-    if [ ! -f /data/certs/$DOMAIN/archive/ ]; then
-        echo "Creating path structure"
-        mkdir -p /data/certs/$DOMAIN/archive/
-        touch /data/certs/$DOMAIN/$certFile.pem
-        touch /data/certs/$DOMAIN/$keyFile.pem
-    fi
+LIVE_CERT="/etc/letsencrypt/live/$NPMALIAS/fullchain.pem"
+LIVE_KEY="/etc/letsencrypt/live/$NPMALIAS/privkey.pem"
+
+# Optional: only run for correct renewed cert
+# [[ "$RENEWED_LINEAGE" != "/etc/letsencrypt/live/$NPMALIAS" ]] && exit 0
+
+echo "Ensuring archive directory exists"
+mkdir -p "$ARCHIVE_DIR"
+
+# Backup existing certs if they exist
+if [[ -f "$CERT_DIR/$CERT_FILE" && -f "$CERT_DIR/$KEY_FILE" ]]; then
+    echo "Backing up existing certs"
+    cp "$CERT_DIR/$CERT_FILE" "$ARCHIVE_DIR/cert-$DATE.pem"
+    cp "$CERT_DIR/$KEY_FILE"  "$ARCHIVE_DIR/key-$DATE.pem"
 fi
 
-#Update certs
+# Update certs
 echo "Updating certs"
-cat /etc/letsencrypt/live/$NPMALIAS/fullchain.pem > /data/certs/$DOMAIN/$certFile.pem
-cat /etc/letsencrypt/live/$NPMALIAS/privkey.pem > /data/certs/$DOMAIN/$keyFile.pem
+cp "$LIVE_CERT" "$CERT_DIR/$CERT_FILE"
+cp "$LIVE_KEY"  "$CERT_DIR/$KEY_FILE"
 
-#Reload nginx configuration
+# Reload nginx
+echo "Reloading nginx"
 nginx -s reload
+
+echo "Certificate update completed successfully"
