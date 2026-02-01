@@ -33,6 +33,6 @@ cp "$LIVE_KEY"  "$CERT_DIR/$KEY_FILE"
 
 # Reload nginx
 echo "Reloading nginx"
-nginx -s reload
+nginx -s reload || echo "nginx reload failed (ignored)"
 
 echo "Certificate update completed successfully"
