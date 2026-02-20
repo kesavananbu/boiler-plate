@@ -11,5 +11,7 @@ services:
       - POST=0
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    ports:
-      - "2375:2375"
+    #ports:
+    #  - "2375:2375"
+    networks:
+      - internal
