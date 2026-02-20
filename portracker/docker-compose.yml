@@ -1,7 +1,8 @@
 services:
   portracker:
     image: mostafawahied/portracker:latest
-    container_name: Portracker
+    container_name: portracker
+    network_mode: host
     security_opt:
       - apparmor:unconfined
     pid: host
