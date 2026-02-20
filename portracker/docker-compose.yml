@@ -16,7 +16,9 @@ services:
       start_period: 90s
     ports:
       - 4999:4999
+    environment:
+      - DOCKER_HOST=tcp://docker-proxy:2375
     volumes:
       - /volume1/docker/portracker:/data:rw
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      #- /var/run/docker.sock:/var/run/docker.sock:ro
     restart: on-failure:5
