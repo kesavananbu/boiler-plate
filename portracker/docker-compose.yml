@@ -18,7 +18,7 @@ services:
     ports:
       - 4999:4999
     environment:
-      - DOCKER_HOST=tcp://docker-proxy:2375
+      - DOCKER_HOST=tcp://localhost:2375
     volumes:
       - /volume1/docker/portracker:/data:rw
       #- /var/run/docker.sock:/var/run/docker.sock:ro
