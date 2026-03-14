@@ -10,8 +10,8 @@ services:
     volumes:
       - /volume1/docker/librespeed:/config
       - /etc/localtime:/etc/localtime:ro
-    #ports:
-    #  - 8080:80
+    ports:
+      - 7070:80
     restart: unless-stopped
     network_mode: host
     #networks:
