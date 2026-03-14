@@ -1,0 +1,21 @@
+services:
+  librespeed:
+    image: lscr.io/linuxserver/librespeed:latest
+    container_name: librespeed
+    environment:
+      #- PUID=1026
+      #- PGID=100
+      - TZ=Asia/Kolkata
+      - PASSWORD=false
+    volumes:
+      - /volume1/docker/speedtest:/config
+      - /etc/localtime:/etc/localtime:ro
+    #ports:
+    #  - 8080:80
+    restart: unless-stopped
+    networks:
+      - internal
+
+networks:
+    internal:
+      external: true
