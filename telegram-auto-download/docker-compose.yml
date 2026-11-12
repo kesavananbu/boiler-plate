@@ -12,7 +12,7 @@ services:
     #ports:
     #  - 8080:8080
     volumes:
-      - /volume1/docker/telegram-auto-downloader/data:/data
+      - /volume1/docker/telegram_auto_downloader/data:/data
       - /volume1/Movies/Media/downloads:/downloads
       - /etc/localtime:/etc/localtime:ro
     env_file:
