@@ -1,16 +1,16 @@
-#networks:
-#  internal:
-#    external: true
+networks:
+  internal:
+    external: true
 
 services:
   telegram-auto-download:
     image: ghcr.io/kesavananbu/telegramautodownload:latest
     container_name: telegram-auto-download
     restart: unless-stopped
-    #networks:
-    #  - internal
-    ports:
-      - 8080:8080
+    networks:
+      - internal
+    #ports:
+    #  - 8080:8080
     volumes:
       - /volume1/docker/telegram-auto-downloader/data:/data
       - /volume1/Movies/Media/downloads:/downloads
