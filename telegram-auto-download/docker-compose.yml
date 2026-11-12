@@ -1,0 +1,33 @@
+#networks:
+#  internal:
+#    external: true
+
+services:
+  telegram-auto-download:
+    image: ghcr.io/kesavananbu/telegramautodownload:latest
+    container_name: telegram-auto-download
+    restart: unless-stopped
+    #networks:
+    #  - internal
+    ports:
+      - 8080:8080
+    volumes:
+      - /volume1/docker/telegram-auto-downloader/data:/data
+      - /volume1/Movies/Media/downloads:/downloads
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - /data/secret.env #Portainer data folder
+    environment:
+      DATA_DIR: /data
+      DOWNLOADS_DIR: /downloads
+      LISTEN_URL: http://0.0.0.0:8080
+      TZ: Asia/Kolkata
+      TELEGRAMDOWNLOAD_WEB_AUTH_ENABLED: ${WEB_AUTH_ENABLED:-true}
+      TELEGRAMDOWNLOAD_WEB_SESSION_DAYS: ${WEB_SESSION_DAYS:-7}
+      TELEGRAMDOWNLOAD_WEB_AUTH_SECURE_COOKIES: ${WEB_AUTH_SECURE_COOKIES:-false}
+      #TELEGRAMDOWNLOAD_WEB_USERNAME: ${WEB_USERNAME:-admin}
+      #TELEGRAMDOWNLOAD_WEB_PASSWORD: ${WEB_PASSWORD:?Set WEB_PASSWORD in .env}
+      #TELEGRAMDOWNLOAD_APP_ID: ${APP_ID:-}
+      #TELEGRAMDOWNLOAD_API_HASH: ${API_HASH:-}
+      #TELEGRAMDOWNLOAD_BOT_TOKEN: ${BOT_TOKEN:-}
+      #TELEGRAMDOWNLOAD_CHAT_ID: ${CHAT_ID:-}
