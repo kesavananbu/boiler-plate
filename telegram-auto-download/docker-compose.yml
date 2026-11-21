@@ -14,7 +14,7 @@ services:
     #  - 8080:8080
     volumes:
       - /volume1/docker/telegram_auto_downloader/data:/data
-      - /volume1/Movies/Media/downloads:/downloads
+      - /volume1/homes/work/telegram_downloader:/downloads:/downloads
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - /data/secret.env #Portainer data folder
