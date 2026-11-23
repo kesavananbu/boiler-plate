@@ -7,8 +7,8 @@ services:
     image: ghcr.io/kesavananbu/telegramautodownload:latest
     container_name: telegram-auto-download
     restart: unless-stopped
-    #user: "${UID}:${GID}"
-    user: "1029:100"
+    user: "${UID}:${GID}"
+    #user: "1029:100"
     networks:
       - internal
     #ports:
